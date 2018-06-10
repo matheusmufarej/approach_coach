@@ -10,6 +10,10 @@ class Opener < ApplicationRecord
 
   # Indirect associations
 
+  has_many   :users,
+             :through => :approaches,
+             :source => :user
+
   # Validations
 
 end
