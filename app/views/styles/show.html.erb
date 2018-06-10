@@ -48,6 +48,26 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_opener" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for styles_id -->
+      <div class="form-group">
+        <label for="styles_id" class="control-label">
+          Styles
+        </label>
+
+        <%= select_tag(:styles_id, options_from_collection_for_select(Style.all, :id, :created_at), :class => "form-control") %>
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Opener
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>
@@ -79,6 +99,20 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_venue" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for style_id -->
+      <input type="hidden" name="style_id" value="<%= @style.id %>">
+
+      <button class="btn btn-block btn-success">
+        Create Venue
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>
