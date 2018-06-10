@@ -15,7 +15,13 @@
 
       <% @openers.each do |opener| %>
       <tr>
-        <td><%= opener.styles.created_at %></td>
+        <td>
+          <% if opener.styles.present? %>
+            <a href="/styles/<%= opener.styles.id %>">
+              <%= opener.styles.created_at %>
+            </a>
+          <% end %>
+        </td>
         <td>
           <a href="/openers/<%= opener.id %>" class="btn btn-primary">Show</a>
           <a href="/openers/<%= opener.id %>/edit" class="btn btn-warning">Edit</a>

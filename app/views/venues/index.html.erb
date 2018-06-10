@@ -15,7 +15,13 @@
 
       <% @venues.each do |venue| %>
       <tr>
-        <td><%= venue.style.created_at %></td>
+        <td>
+          <% if venue.style.present? %>
+            <a href="/styles/<%= venue.style.id %>">
+              <%= venue.style.created_at %>
+            </a>
+          <% end %>
+        </td>
         <td>
           <a href="/venues/<%= venue.id %>" class="btn btn-primary">Show</a>
           <a href="/venues/<%= venue.id %>/edit" class="btn btn-warning">Edit</a>
