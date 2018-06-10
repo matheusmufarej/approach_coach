@@ -1,6 +1,7 @@
 class StylesController < ApplicationController
   def index
-    @styles = Style.page(params[:page]).per(10)
+    @q = Style.ransack(params[:q])
+    @styles = @q.result(:distinct => true).includes(:openers, :venues, :approaches).page(params[:page]).per(10)
 
     render("styles/index.html.erb")
   end
