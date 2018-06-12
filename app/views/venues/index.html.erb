@@ -9,6 +9,21 @@
       <p class="lead">Narrow results:</p>
 
         <div class="form-group">
+    <%= f.label :website_cont, "Website contains" %>
+    <%= f.text_field :website_cont, :class => "form-control", :placeholder => "Website contains" %>
+  </div>
+
+<div class="form-group">
+    <%= f.label :description_cont, "Description contains" %>
+    <%= f.text_field :description_cont, :class => "form-control", :placeholder => "Description contains" %>
+  </div>
+
+<div class="form-group">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
+  </div>
+
+<div class="form-group">
           <%= f.label :created_at, "Created at" %>
           <div class="row">
             <div class='col-md-6 mb-1'>
@@ -49,44 +64,9 @@
       </script>
 
         <div class="form-group">
-          <%= f.label :created_at, "Style Created at" %>
-          <div class="row">
-            <div class='col-md-6 mb-1'>
-              <div class='input-group date' id='stylegteqcreated_atPicker'>
-                  <%= f.text_field :style_created_at_gteq, :class => "form-control", :placeholder => "Style Created at greater than or equal to" %>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-            </div>
-
-            <div class='col-md-6'>
-              <div class='input-group date' id='stylelteqcreated_atPicker'>
-                  <%= f.text_field :style_created_at_lteq, :class => "form-control", :placeholder => "Style Created at less than or equal to" %>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-            </div>
-          </div>
-      </div>
-      <script type="text/javascript">
-          $(function () {
-              $('#stylegteqcreated_atPicker').datetimepicker({
-                  format: 'YYYY-MM-DD hh:mm:SS'
-              });
-              $('#stylelteqcreated_atPicker').datetimepicker({
-                  useCurrent: false,
-                  format: 'YYYY-MM-DD hh:mm:SS'
-              });
-              $('#stylegteqcreated_atPicker').on("dp.change", function (e) {
-                  $('#stylelteqcreated_atPicker').data("DateTimePicker").minDate(e.date);
-              });
-              $('#stylelteqcreated_atPicker').on("dp.change", function (e) {
-                  $('#stylegteqcreated_atPicker').data("DateTimePicker").maxDate(e.date);
-              });
-          });
-      </script>
+      <%= f.label :style_title_cont, "Style title contains" %>
+      <%= f.text_field :style_title_cont, :class => "form-control", :placeholder => "Style title contains" %>
+    </div>
 
 <div class="form-group">
       <%= f.label :users_email_cont, "User email contains" %>
@@ -103,11 +83,25 @@
   </div>
 </div>
 
+
+<div class="row m-b-2">
+  <div class="col-md-12">
+    <div>
+      <div id="location_map" style="height: 480px;"></div>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
         <th>Style</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Description</th>
+        <th>Website</th>
+        <th>Photo</th>
         <th>Actions</th>
       </tr>
 
@@ -116,10 +110,15 @@
         <td>
           <% if venue.style.present? %>
             <a href="/styles/<%= venue.style.id %>">
-              <%= venue.style.created_at %>
+              <%= venue.style.title %>
             </a>
           <% end %>
         </td>
+        <td><%= venue.name %></td>
+        <td><%= venue.address %></td>
+        <td><%= venue.description %></td>
+        <td><%= venue.website %></td>
+        <td><img src='<%= venue.photo %>' class='img-responsive'></td>
         <td>
           <a href="/venues/<%= venue.id %>" class="btn btn-primary">Show</a>
           <a href="/venues/<%= venue.id %>/edit" class="btn btn-warning">Edit</a>
@@ -131,3 +130,14 @@
     <%= paginate @venues, theme: 'twitter-bootstrap-4' %>
   </div>
 </div>
+
+<script src="//maps.google.com/maps/api/js?v=3.24&key=AIzaSyCOTPWiuvyyo6sKoIBzKA4-1ol-vTOIOlM"></script>
+<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'location_map'}}, function(){
+    markers = handler.addMarkers(<%= raw @location_hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>

@@ -2,6 +2,11 @@ class VenuesController < ApplicationController
   def index
     @q = Venue.ransack(params[:q])
     @venues = @q.result(:distinct => true).includes(:approaches, :style, :users, :openers).page(params[:page]).per(10)
+    @location_hash = Gmaps4rails.build_markers(@venues.where.not(:address_latitude => nil)) do |venue, marker|
+      marker.lat venue.address_latitude
+      marker.lng venue.address_longitude
+      marker.infowindow "<h5><a href='/venues/#{venue.id}'>#{venue.style_id}</a></h5><small>#{venue.address_formatted_address}</small>"
+    end
 
     render("venues/index.html.erb")
   end
@@ -23,6 +28,11 @@ class VenuesController < ApplicationController
     @venue = Venue.new
 
     @venue.style_id = params[:style_id]
+    @venue.name = params[:name]
+    @venue.address = params[:address]
+    @venue.description = params[:description]
+    @venue.website = params[:website]
+    @venue.photo = params[:photo]
 
     save_status = @venue.save
 
@@ -50,6 +60,11 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
 
     @venue.style_id = params[:style_id]
+    @venue.name = params[:name]
+    @venue.address = params[:address]
+    @venue.description = params[:description]
+    @venue.website = params[:website]
+    @venue.photo = params[:photo]
 
     save_status = @venue.save
 

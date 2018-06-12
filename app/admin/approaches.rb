@@ -1,6 +1,6 @@
 ActiveAdmin.register Approach do
 
- permit_params :user_id, :venue_id, :opener_id
+ permit_params :user_id, :venue_id, :opener_id, :success
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

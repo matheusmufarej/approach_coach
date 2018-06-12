@@ -4,6 +4,7 @@ class CreateApproaches < ActiveRecord::Migration
       t.integer :user_id
       t.integer :venue_id
       t.integer :opener_id
+      t.boolean :success
 
       t.timestamps
 

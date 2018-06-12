@@ -39,6 +39,14 @@
         <%= select_tag(:opener_id, options_from_collection_for_select(Opener.all, :id, :styles_id, @approach.opener_id), :class => "form-control") %>
       </div>
 
+      <!-- Label and input for success -->
+      <div class="checkbox">
+        <label for="success">
+          <input type="checkbox" id="success" name="success" value="1" <%= "checked" if @approach.success %>>
+          Success
+        </label>
+      </div>
+
       <button class="btn btn-success">
         Create Approach
       </button>

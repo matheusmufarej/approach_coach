@@ -9,6 +9,16 @@
       <p class="lead">Narrow results:</p>
 
         <div class="form-group">
+    <%= f.label :line_cont, "Line contains" %>
+    <%= f.text_field :line_cont, :class => "form-control", :placeholder => "Line contains" %>
+  </div>
+
+<div class="form-group">
+    <%= f.label :title_cont, "Title contains" %>
+    <%= f.text_field :title_cont, :class => "form-control", :placeholder => "Title contains" %>
+  </div>
+
+<div class="form-group">
           <%= f.label :created_at, "Created at" %>
           <div class="row">
             <div class='col-md-6 mb-1'>
@@ -49,44 +59,9 @@
       </script>
 
         <div class="form-group">
-          <%= f.label :created_at, "Style Created at" %>
-          <div class="row">
-            <div class='col-md-6 mb-1'>
-              <div class='input-group date' id='stylesgteqcreated_atPicker'>
-                  <%= f.text_field :styles_created_at_gteq, :class => "form-control", :placeholder => "Style Created at greater than or equal to" %>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-            </div>
-
-            <div class='col-md-6'>
-              <div class='input-group date' id='styleslteqcreated_atPicker'>
-                  <%= f.text_field :styles_created_at_lteq, :class => "form-control", :placeholder => "Style Created at less than or equal to" %>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-            </div>
-          </div>
-      </div>
-      <script type="text/javascript">
-          $(function () {
-              $('#stylesgteqcreated_atPicker').datetimepicker({
-                  format: 'YYYY-MM-DD hh:mm:SS'
-              });
-              $('#styleslteqcreated_atPicker').datetimepicker({
-                  useCurrent: false,
-                  format: 'YYYY-MM-DD hh:mm:SS'
-              });
-              $('#stylesgteqcreated_atPicker').on("dp.change", function (e) {
-                  $('#styleslteqcreated_atPicker').data("DateTimePicker").minDate(e.date);
-              });
-              $('#styleslteqcreated_atPicker').on("dp.change", function (e) {
-                  $('#stylesgteqcreated_atPicker').data("DateTimePicker").maxDate(e.date);
-              });
-          });
-      </script>
+      <%= f.label :styles_title_cont, "Style title contains" %>
+      <%= f.text_field :styles_title_cont, :class => "form-control", :placeholder => "Style title contains" %>
+    </div>
 
 <div class="form-group">
       <%= f.label :users_email_cont, "User email contains" %>
@@ -108,6 +83,8 @@
     <table class="table table-striped table-hover">
       <tr>
         <th>Styles</th>
+        <th>Title</th>
+        <th>Line</th>
         <th>Actions</th>
       </tr>
 
@@ -116,10 +93,12 @@
         <td>
           <% if opener.styles.present? %>
             <a href="/styles/<%= opener.styles.id %>">
-              <%= opener.styles.created_at %>
+              <%= opener.styles.title %>
             </a>
           <% end %>
         </td>
+        <td><%= opener.title %></td>
+        <td><%= opener.line %></td>
         <td>
           <a href="/openers/<%= opener.id %>" class="btn btn-primary">Show</a>
           <a href="/openers/<%= opener.id %>/edit" class="btn btn-warning">Edit</a>

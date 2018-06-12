@@ -23,6 +23,8 @@ class OpenersController < ApplicationController
     @opener = Opener.new
 
     @opener.styles_id = params[:styles_id]
+    @opener.title = params[:title]
+    @opener.line = params[:line]
 
     save_status = @opener.save
 
@@ -50,6 +52,8 @@ class OpenersController < ApplicationController
     @opener = Opener.find(params[:id])
 
     @opener.styles_id = params[:styles_id]
+    @opener.title = params[:title]
+    @opener.line = params[:line]
 
     save_status = @opener.save
 

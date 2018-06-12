@@ -24,7 +24,25 @@
           Styles
         </label>
 
-        <%= select_tag(:styles_id, options_from_collection_for_select(Style.all, :id, :created_at, @opener.styles_id), :class => "form-control") %>
+        <%= select_tag(:styles_id, options_from_collection_for_select(Style.all, :id, :title, @opener.styles_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for title -->
+      <div class="form-group">
+        <label for="title" class="control-label">
+          Title
+        </label>
+
+        <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="<%= @opener.title %>">
+      </div>
+
+      <!-- Label and input for line -->
+      <div class="form-group">
+        <label for="line" class="control-label">
+          Line
+        </label>
+
+        <input type="text" id="line" name="line" placeholder="Line" class="form-control" value="<%= @opener.line %>">
       </div>
 
       <button class="btn btn-warning">
