@@ -23,6 +23,8 @@ class StylesController < ApplicationController
   def create
     @style = Style.new
 
+    @style.title = params[:title]
+    @style.description = params[:description]
 
     save_status = @style.save
 
@@ -49,6 +51,8 @@ class StylesController < ApplicationController
   def update
     @style = Style.find(params[:id])
 
+    @style.title = params[:title]
+    @style.description = params[:description]
 
     save_status = @style.save
 

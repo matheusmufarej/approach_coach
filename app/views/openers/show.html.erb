@@ -9,10 +9,16 @@
       <dd>
         <% if @opener.styles.present? %>
           <a href="/styles/<%= @opener.styles_id %>">
-            <%= @opener.styles.created_at %>
+            <%= @opener.styles.title %>
           </a>
         <% end %>
       </dd>
+
+      <dt>Title</dt>
+      <dd><%= @opener.title %></dd>
+
+      <dt>Line</dt>
+      <dd><%= @opener.line %></dd>
 
     </dl>
 
@@ -77,6 +83,14 @@
 
       <!-- Label and input for opener_id -->
       <input type="hidden" name="opener_id" value="<%= @opener.id %>">
+
+      <!-- Label and input for success -->
+      <div class="checkbox">
+        <label for="success">
+          <input type="checkbox" id="success" name="success" value="1" <%= "checked" if @approach.success %>>
+          Success
+        </label>
+      </div>
 
       <button class="btn btn-block btn-success">
         Create Approach
